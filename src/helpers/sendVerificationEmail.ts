@@ -1,19 +1,19 @@
 import {resend} from "@/lib/resend";
 import VerificationEmail from "../../emails/VerificationEmail";
-import { ApiResponse } from "@/types/ApiResponse";
 
 
 export async function sendVerificationEmail(
    email : string,
    username :string,
    verifyCode : string 
-): Promise<ApiResponse>{
+){
 try {
+    const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
     await resend.emails.send({
         from: 'onboarding@resend.dev',
       to: email,
       subject: 'AnyMess Verification Code',
-      react: VerificationEmail({ username, otp: verifyCode }), 
+      react: VerificationEmail({ BASE_URL, username, otp: verifyCode }), 
     });
     return {
         success: true,

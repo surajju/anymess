@@ -1,11 +1,11 @@
 import 'server-only';
-import  AuthError  from 'next-auth';
+import  {AuthError} from 'next-auth';
 import bcrypt from 'bcryptjs';
 import { db } from '.';
 import { users } from './schema';
 import {and,eq,or} from 'drizzle-orm';
 
-class InvalidTypeError extends Error {    code = 'login-with-oauth';
+class InvalidTypeError extends AuthError {    code = 'login-with-oauth';
 }
 
 export const checkUsername= async (username:string) => {

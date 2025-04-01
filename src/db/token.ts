@@ -4,7 +4,7 @@ import { and, eq, lt } from 'drizzle-orm';
 import { db } from '.';
 import { verificationTokens } from './schema';
 
-export const saveToke =async (username:string,token:string,expires:Date) =>{
+export const saveToken =async (username:string,token:string,expires:Date) =>{
     const [verificationToken] = await db
     .insert(verificationTokens)
     .values({
