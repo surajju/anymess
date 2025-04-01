@@ -1,28 +1,19 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getToken } from 'next-auth/jwt';
-export { default } from 'next-auth/middleware';
+//export { auth as middleware } from '@/app/auth';
+import { auth } from '@/app/auth';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+export default auth;
 
 export const config = {
-    matcher: ['/dashboard/:path*', '/sign-in', '/sign-up', '/', '/verify/:path*'],
-  };
-
-  export async function middleware(request :NextRequest){
-    const token = await getToken({req:request});
-    const url = request.nextUrl;
-    //jab verified user try kare sign-in ,sign-up or homepage 
-    //jane ka tab dashboard pe redirect kardena
-    if(
-        token &&
-        (url.pathname.startsWith('/sign-in') ||
-            url.pathname.startsWith('/sign-up') ||
-            url.pathname.startsWith('/verify') ||
-            url.pathname ===  '/'
-
-    )){
-        return NextResponse.redirect(new URL('/dashboard', request.url));
-    }
-    if (!token && url.pathname.startsWith('/dashboard')) {
-        return NextResponse.redirect(new URL('/sign-in', request.url));
-      }
-      return NextResponse.next();
-  }
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * Feel free to modify this pattern to include more paths.
+     */
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+  ],
+};
