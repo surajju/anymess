@@ -91,7 +91,7 @@ export default function SignUpForm() {
             <UserPlus size={28} className="animate-pulse" />
           </div>
           <h1 className="mb-2 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent lg:text-5xl">
-            True Feedback
+          AnyMess
           </h1>
           <p className="mb-8 text-gray-600">Sign up to start your anonymous adventure</p>
         </div>
