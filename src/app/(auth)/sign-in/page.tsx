@@ -53,7 +53,7 @@ export default function SignInForm() {
           <h1 className="mb-2 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent lg:text-5xl">
             AnyMess
           </h1>
-          <p className="mb-8 text-gray-600">Sign in to continue your secret conversations</p>
+          <p className="mb-8 text-gray-600">"GitHub login for now - our own magic doorway under construction!"</p>
         </div>
 
         <Form {...form}>
