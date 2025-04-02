@@ -7,7 +7,7 @@ import { CredentialsSignin,User } from 'next-auth';
 import { signIn,signOut,auth,InvalidTypeError } from '@/app/auth';
 import { checkUsername,createUser,findUserByUsernameOrEmail,updateUser } from '@/db/user';
 import { revalidatePath } from 'next/cache';
-import { findToken,saveToken, updateToken } from '@/db/token';
+import { findToken, updateToken } from '@/db/token';
 import { error } from 'console';
 import { date } from 'drizzle-orm/pg-core';
 
