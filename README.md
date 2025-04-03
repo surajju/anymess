@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ANYMESS
 
-## Getting Started
+**ANYMESS** is an anonymous messaging app built with Next.js. It lets users send and receive messages without showing who sent them. After signing up and verifying their email, users get a unique link (like `anymess.com/u/username`) to share. Anyone with the link can send messages, and the user can see them on their dashboard.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Send and receive messages anonymously
+- Unique URL for each user to get messages
+- Email verification for secure signup
+- Login system with NextAuth
+- Dashboard to view all messages
+- Professional email address for notifications (e.g., `onboarding@anymess.com`)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Next.js 14 (for frontend and backend)
+- NextAuth for login
+- Resend for sending emails
+- Prisma with PostgreSQL for the database
+- TypeScript for safer code
+- Deployed on Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How to Set Up Locally
 
-## Learn More
+Follow these steps to run ANYMESS on your computer:
 
-To learn more about Next.js, take a look at the following resources:
+1. **Clone the Project**:
+   ```
+   git clone https://github.com/surajju/anymess.git
+   cd anymess
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Install Dependencies**:
+   ```
+   npm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Set Up the Database**:
+   - Create a PostgreSQL database (use a service like Supabase or Neon, or set up PostgreSQL locally).
+   - Run this command to set up the database tables:
+     ```
+     npx prisma migrate dev
+     ```
 
-## Deploy on Vercel
+4. **Add Environment Variables**:
+   - Create a `.env` file in the project folder and add these:
+     ```
+     RESEND_API_KEY=re_123456789  # Get this from resend.com
+     BASE_URL=http://localhost:3000
+     DATABASE_URL=postgresql://user:password@host:5432/dbname  # Your database URL
+     NEXTAUTH_SECRET=your-secret-here  # Generate with `openssl rand -base64 32`
+     NEXTAUTH_URL=http://localhost:3000
+     ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. **Run the App**:
+   ```
+   npm run dev
+   ```
+   - Open `http://localhost:3000` in your browser.
+   - Sign up, verify your email, and test sending messages to your unique URL (e.g., `http://localhost:3000/u/username`).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Notes
+
+- You need Node.js (18.x or higher), npm, Git, and a PostgreSQL database to run this.
+- Resend's free tier only sends emails to verified addresses unless you set up a custom domain.
+
+**Built by Suraj**  
+[GitHub](https://github.com/surajju)
