@@ -16,7 +16,7 @@
 - Next.js 14 (for frontend and backend)
 - NextAuth for login
 - Resend for sending emails
-- Prisma with PostgreSQL for the database
+- Prisma with Turso (libSQL) for the database
 - TypeScript for safer code
 - Deployed on Vercel
 
@@ -36,7 +36,15 @@ Follow these steps to run ANYMESS on your computer:
    ```
 
 3. **Set Up the Database**:
-   - Create a PostgreSQL database (use a service like Supabase or Neon, or set up PostgreSQL locally).
+   - Create a Turso database:
+     ```
+     turso db create anymess
+     ```
+   - Get your database URL and auth token:
+     ```
+     turso db show anymess --url
+     turso auth token
+     ```
    - Run this command to set up the database tables:
      ```
      npx prisma migrate dev
@@ -47,7 +55,8 @@ Follow these steps to run ANYMESS on your computer:
      ```
      RESEND_API_KEY=re_123456789  # Get this from resend.com
      BASE_URL=http://localhost:3000
-     DATABASE_URL=postgresql://user:password@host:5432/dbname  # Your database URL
+     DATABASE_URL=libsql://your-db-url  # Your Turso database URL
+     DATABASE_AUTH_TOKEN=your-auth-token  # Your Turso auth token
      NEXTAUTH_SECRET=your-secret-here  # Generate with `openssl rand -base64 32`
      NEXTAUTH_URL=http://localhost:3000
      ```
@@ -61,7 +70,7 @@ Follow these steps to run ANYMESS on your computer:
 
 ## Notes
 
-- You need Node.js (18.x or higher), npm, Git, and a PostgreSQL database to run this.
+- You need Node.js (18.x or higher), npm, Git, and the Turso CLI to run this.
 - Resend's free tier only sends emails to verified addresses unless you set up a custom domain.
 
 **Built by Suraj**  
