@@ -11,8 +11,8 @@ import { findToken, updateToken } from '@/db/token';
 import { error } from 'console';
 import { date } from 'drizzle-orm/pg-core';
 
-export async function SignIn(){
-    await signIn('github',{redirectTo : '/dashboard'});
+export async function SignIn(provider:'github' |'google' = 'github'){
+    await signIn(provider,{redirectTo : '/dashboard'});
 }
 
 export async function SignOut() {

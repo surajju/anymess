@@ -2,6 +2,7 @@ import NextAuth,{ AuthError}  from "next-auth";
 import {DrizzleAdapter as Adapter, DrizzleAdapter} from "@auth/drizzle-adapter";
 import Credentials from "next-auth/providers/credentials";
 import GitHub from "next-auth/providers/github";
+import Google from "next-auth/providers/google";
 import type { NextAuthConfig } from 'next-auth';
 import { findUserById,loginUser } from "@/db/user";
 import { db } from "@/db";
@@ -10,11 +11,13 @@ import { adapter } from "next/dist/server/web/adapter";
 
 export class InvalidTypeError extends AuthError{
     code ='login-with-oauth';
+
 }
 
 export const config = {
     providers : [
-        GitHub({
+        GitHub(
+            {
             async profile(profile){
                 return{
                     id : profile.id.toString(),
@@ -22,6 +25,20 @@ export const config = {
                     email : profile.email,
                     image : profile.avatar_url,
                     username : profile.login,
+                    isVerified :true,
+                }
+            }
+        }),
+        Google({
+            clientId : process.env.GOOGLE_CLIENT_ID,
+            clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+            async profile(profile){
+                return{
+                    id : profile.sub,
+                    name : profile.name,
+                    email : profile.email,
+                    image : profile.picture,
+                    username : profile.email.split('@')[0],
                     isVerified :true,
                 }
             }
